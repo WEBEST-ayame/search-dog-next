@@ -1,0 +1,13 @@
+.backButton {
+  background: #fff;
+  padding: 10px;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  color: #333;
+}
+.imageWrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
