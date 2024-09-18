@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import DogImage from "@/component/DogImage";
 import style from "./page.module.css";
+import { fetchDogImage } from "@/lib/fetchDogImage";
 
 const BreedPage: React.FC = () => {
   const params = useParams();
@@ -13,29 +14,25 @@ const BreedPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // useEffect内でfetchDogImageを定義
-    const fetchDogImage = async () => {
+    const getDogImages = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(
-          `https://dog.ceo/api/breed/${breed}/images`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setDogImageUrl(data.message);
-        } else {
-          setError("画像を取得できませんでした。犬種を確認してください。");
-        }
+        const images = await fetchDogImage(breed);
+        setDogImageUrl(images);
       } catch (err) {
-        setError("エラーが発生しました。");
+        const errorMessage =
+          typeof err === "string"
+            ? err
+            : (err as { message?: string }).message || "エラーが発生しました。";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
     };
 
     if (breed) {
-      fetchDogImage(); // 関数を呼び出す
+      getDogImages(); // 関数を呼び出す
     }
   }, [breed]); // 依存配列はbreedのみ
 
