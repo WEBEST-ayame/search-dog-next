@@ -37,10 +37,10 @@ const BreedPage: React.FC = () => {
   }, [breed]); // 依存配列はbreedのみ
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div className={style.wrapper}>
       <h1>{breed}の画像</h1>
       {loading && <p>読み込み中...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className={style.error}>{error}</p>}
       <div className={style.imageWrap}>
         {dogImageUrl &&
           dogImageUrl.map((src, index) => <DogImage key={index} url={src} />)}

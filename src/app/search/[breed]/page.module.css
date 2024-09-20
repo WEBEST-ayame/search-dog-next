@@ -1,3 +1,10 @@
+.wrapper {
+  text-align: center;
+  margin-top: 50px;
+}
+.error {
+  color: red;
+}
 .backButton {
   background: #fff;
   padding: 10px;
