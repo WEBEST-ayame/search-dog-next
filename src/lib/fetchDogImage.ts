@@ -1,6 +1,6 @@
-export const fetchDogImage = async (
-  breed: string | string[]
-): Promise<string[] | null> => {
+import { Breed } from "./types";
+
+export const fetchDogImage = async (breed: Breed) => {
   try {
     const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`);
     if (response.ok) {
